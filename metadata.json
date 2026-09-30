@@ -1,0 +1,6 @@
+{
+  "name": "AI Inventory & Supplier Management System",
+  "description": "AI-powered inventory tracking, fast-moving demand prediction, automated reorder engine, supplier evaluation, and purchase order management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

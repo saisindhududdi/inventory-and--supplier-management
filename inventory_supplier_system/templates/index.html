@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Based Inventory & Supplier Management System</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">📦</div>
+        <div class="brand-text">
+          <h2>StockPulse <span>AI</span></h2>
+          <small>Supply Chain Engine</small>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="dashboard">📊 Dashboard</button>
+        <button class="nav-btn" data-tab="inventory">📦 Inventory Catalog</button>
+        <button class="nav-btn" data-tab="reorder">🔄 Reorder Engine</button>
+        <button class="nav-btn" data-tab="suppliers">🏢 Supplier Ranking</button>
+        <button class="nav-btn" data-tab="orders">📑 Purchase Orders</button>
+        <button class="nav-btn" data-tab="assistant">🤖 AI Assistant</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <small>College Mini Project 2026</small>
+        <span>Python • Flask • SQLite • AI</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-title">
+          <h1 id="page-title">Dashboard Overview</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="badge badge-ai">Gemini AI / Rule Engine Active</span>
+        </div>
+      </header>
+
+      <div class="content-container">
+        <!-- Dashboard Tab -->
+        <section id="tab-dashboard" class="tab-pane active">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Total Products</span>
+              <h3 id="stat-products">22</h3>
+              <small>Catalog SKUs</small>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Critical Stock Risks</span>
+              <h3 id="stat-critical" class="text-danger">5</h3>
+              <small>Immediate reorder needed</small>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Low Stock Items</span>
+              <h3 id="stat-low" class="text-warning">6</h3>
+              <small>At or below ROP</small>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Active Suppliers</span>
+              <h3 id="stat-suppliers">8</h3>
+              <small>Contracted vendors</small>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3>🚨 Critical Stock-Out Alerts & Automated Reorders</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="alerts-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Current Stock</th>
+                    <th>Reorder Point</th>
+                    <th>Risk Level</th>
+                    <th>Predictive Reason</th>
+                  </tr>
+                </thead>
+                <tbody id="alerts-tbody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Inventory Tab -->
+        <section id="tab-inventory" class="tab-pane">
+          <div class="card">
+            <div class="card-header flex-between">
+              <h3>Catalog Inventory & Reorder Points</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Current Stock</th>
+                    <th>Unit Price</th>
+                    <th>ROP</th>
+                    <th>Daily Velocity</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-tbody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI Assistant Tab -->
+        <section id="tab-assistant" class="tab-pane">
+          <div class="chat-wrapper card">
+            <div class="chat-header">
+              <h3>🤖 AI Supply Chain Specialist</h3>
+              <p>Ask about stock levels, fast-moving items, or supplier selection.</p>
+            </div>
+            <div class="chat-box" id="chat-messages">
+              <div class="chat-msg bot">
+                Hello! I am your AI Inventory Assistant. How can I assist you today?
+              </div>
+            </div>
+            <form id="chat-form" class="chat-input-bar">
+              <input type="text" id="chat-input" placeholder="e.g. Which products need immediate reordering?" required>
+              <button type="submit" class="btn btn-primary">Ask AI</button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
