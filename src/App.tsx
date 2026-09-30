@@ -83,7 +83,8 @@ export default function App() {
 
   // Check backend Gemini availability
   useEffect(() => {
-    fetch('/api/health')
+    const apiBase = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || '';
+    fetch(`${apiBase}/api/health`)
       .then((res) => res.json())
       .then((data) => {
         setIsAiActive(data?.geminiConfigured ?? false);

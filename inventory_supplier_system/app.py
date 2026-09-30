@@ -33,7 +33,7 @@ def get_db():
 # Ensure database exists
 if not os.path.exists(app.config['DATABASE_PATH']):
     from seed_data import seed_database
-    seed_database()
+    seed_database(app.config['DATABASE_PATH'])
 
 # ----------------- WEB ROUTE -----------------
 @app.route('/')
@@ -210,13 +210,32 @@ def update_po_status(po_id):
     conn.close()
     return jsonify({'message': f'PO status changed to {new_status}'})
 
-# ----------------- AI ASSISTANT ENDPOINT -----------------
+# ----------------- AI ASSISTANT ENDPOINTS -----------------
 @app.route('/api/ai/chat', methods=['POST'])
 def ai_chat():
     data = request.get_json() or {}
     prompt = data.get('prompt', '')
     reply = query_gemini_or_fallback(prompt)
     return jsonify({'reply': reply})
+
+@app.route('/api/ai/analyze', methods=['POST'])
+def ai_analyze():
+    data = request.get_json() or {}
+    products = data.get('products', [])
+    prompt = f"Perform a high-level strategic supply chain audit for {len(products)} inventory items."
+    reply = query_gemini_or_fallback(prompt)
+    return jsonify({'analysis': reply, 'mode': 'gemini_or_rule'})
+
+# ----------------- SYSTEM HEALTH -----------------
+@app.route('/api/health', methods=['GET'])
+def health():
+    gemini_key = os.getenv('GEMINI_API_KEY', '')
+    is_gemini_configured = bool(gemini_key and gemini_key != 'your_gemini_api_key_here')
+    return jsonify({
+        'status': 'healthy',
+        'geminiConfigured': is_gemini_configured,
+        'service': 'Flask Inventory & Supplier Engine'
+    })
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

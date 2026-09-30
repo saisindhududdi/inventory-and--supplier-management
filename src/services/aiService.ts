@@ -290,7 +290,8 @@ export async function sendAiQuery(
   purchaseOrders: PurchaseOrder[]
 ): Promise<string> {
   try {
-    const res = await fetch('/api/ai/chat', {
+    const apiBase = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || '';
+    const res = await fetch(`${apiBase}/api/ai/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

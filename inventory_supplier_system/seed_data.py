@@ -7,8 +7,9 @@ import os
 
 DB_PATH = os.path.join(os.path.dirname(__file__), 'database.db')
 
-def seed_database():
-    conn = sqlite3.connect(DB_PATH)
+def seed_database(target_path=None):
+    path = target_path or DB_PATH
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
 
     # Drop existing tables to ensure clean seed
